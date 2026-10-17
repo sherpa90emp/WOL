@@ -1,0 +1,8 @@
+services:
+  wol-app:
+    build: .
+    container_name: wol-app
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
