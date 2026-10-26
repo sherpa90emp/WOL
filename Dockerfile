@@ -7,10 +7,10 @@ RUN apk add --no-cache unzip bzip2 \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html/Backend
+WORKDIR /var/www/html
 
 COPY . .
 
 EXPOSE 8085
 
-CMD ["php", "-S", "0.0.0.0:8085"]
+CMD ["php", "-S", "0.0.0.0:8085", "-t", "Frontend", "router.php"]

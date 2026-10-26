@@ -1,10 +1,8 @@
 <?php
 
-require "../.env";
-
-$macAddress = MAC_ADDRESS;
-$port = "";
-$broadcastAddress = "";
+$macAddress = getenv("MAC_ADDRESS");
+$port = getenv("PORT");
+$broadcastAddress = getenv("BROADCAST_ADDRESS");
 
 
 
