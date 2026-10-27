@@ -49,8 +49,21 @@ class Router
                             $controllerInstance = new $className();
                             $methodName = $method->getName();
 
-                            $controllerInstance->$methodName();
-                            return;
+                            $response = $controllerInstance->$methodName();
+
+                            if ($response !== null)
+                            {
+                                echo $response;
+                                exit;
+                            }
+
+                            http_response_code(200);
+                            echo json_encode([
+                                'warning' => 'Empty Response',
+                                'method' => $requestMethod,
+                                'uri' => $requestUri,
+                            ]);
+                            exit;
                         }
 
                         $wrongMethod = true;
@@ -62,11 +75,20 @@ class Router
         if ($wrongMethod)
         {
             http_response_code(405);
-            echo json_encode(['error' => 'Method Not Allowed']);
-            return;
+            echo json_encode([
+                'error' => 'Method Not Allowed',
+                'method' => $requestMethod,
+                'uri' => $requestUri,
+            ]);
+            exit;
         }
 
         http_response_code(404);
-        echo json_encode(['error' => 'Endpoint Not Found']);
+        echo json_encode([
+            'error' => 'Endpoint Not Found',
+            'method' => $requestMethod,
+            'uri' => $requestUri,
+            ]);
+        exit;
     }
 }

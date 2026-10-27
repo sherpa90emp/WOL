@@ -5,7 +5,7 @@ class WolService
 {
     public function wakeOnLan(): bool
     {
-        require '../Command/WOL.php';
+        require_once '../Command/WOL.php';
 
         $macAddress = getenv("MAC_ADDRESS");
         $port = (int) getenv("PORT");

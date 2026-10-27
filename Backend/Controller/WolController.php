@@ -3,12 +3,27 @@
 
 class WolController
 {
-    #[Route(path: '/wol', method: ['POST'])]
-    public function wol()
+    #[Route(path: '/api/wol', method: 'POST')]
+    public function wol(): string
     {
-        $wolService = new WolService();
-        $wolService->wakeOnLan();
+        // $wolService = new WolService();
+        $wolCheck = true; //$wolService->wakeOnLan();
 
-        echo json_encode(['success' => true]);
+        if ($wolCheck)
+        {
+            $data = [
+                'status' => 'success',
+                'message' => 'Server Up',
+            ];
+
+            return json_encode($data);
+        }
+
+        $data = [
+            'status' => 'error',
+            'message' => 'Server Down',
+        ];
+
+        return json_encode($data);
     }
 }
