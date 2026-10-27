@@ -15,7 +15,7 @@ class Router
 
     public function dispatch(): void
     {
-        $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $requestUri = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/', '/');
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         $files = glob($this->controllerDir . '/*.php');
@@ -34,7 +34,7 @@ class Router
 
             $reflection = new ReflectionClass($className);
 
-            foreach ($reflection->getMethods() as $method)
+            foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method)
             {
                 $attributes = $method->getAttributes(Route::class);
 
