@@ -1,12 +1,6 @@
 <?php
 
-$macAddress = getenv("MAC_ADDRESS");
-$port = getenv("PORT");
-$broadcastAddress = getenv("BROADCAST_ADDRESS");
-
-
-
-function wakeOnLan($macAddress, $broadcastAddress, $port)
+function wakeOnLan($macAddress, $broadcastAddress, $port): bool
 {
     if (strlen($macAddress) != 12) {
         echo "Errore: Indirizzo MAC non valido";
@@ -22,8 +16,8 @@ function wakeOnLan($macAddress, $broadcastAddress, $port)
     }
 
     socket_set_option($socket, SOL_SOCKET, SO_BROADCAST, 1);
-    $result = socket_sendto($socket, $magicPacket, 0, 0, $broadcastAddress, $port);
+    $inviato = socket_sendto($socket, $magicPacket, strlen($magicPacket), 0, $broadcastAddress, $port);
     socket_close($socket);
 
-    return $result;
+    return $inviato !== false;
 }
