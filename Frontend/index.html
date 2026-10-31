@@ -7,6 +7,7 @@
     <title>WOL</title>
 
     <link href="style/bootstrap.min.css" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
@@ -16,7 +17,10 @@
         <div class="card-header">
             Nome Server
         </div>
-        <h4 class="card-title pt-3">Status : <span class="d-inline-block bg-success rounded-circle p-2" onclick="status()"></span></h4>
+        <div class="card-title pt-3">Status :
+            <div id="status" class="spinner-border fg-primary" role="status" onclick="status()">
+            </div>
+        </div>
         <div class="card-body">
             <button type="button" class="btn btn-success" onclick="wol()">
                 WAKE UP

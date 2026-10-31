@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', function ()
+{
+    setTimeout(function (){
+        void status()
+    }, 2000)
+})
+
+
 async function wol() {
 
     const url = '/api/wol'
@@ -22,6 +30,11 @@ async function wol() {
     } catch (error) {
         console.error(error.message)
     }
+
+    setTimeout(function ()
+    {
+      status();
+    }, 5000)
 }
 
 async function status(){
@@ -42,7 +55,24 @@ async function status(){
         }
 
         const testoRisposta = await response.json()
-        console.log(testoRisposta)
+
+        if (testoRisposta[0].up) {
+            let status = document.querySelector('#status')
+            status.classList.remove('spinner-border', 'fg-primary')
+            status.classList.add('spinner-grow', 'text-success')
+        }
+        else
+        {
+            let status = document.querySelector('#status')
+            status.classList.remove('spinner-border', 'fg-primary')
+            status.classList.add('spinner-grow', 'text-danger')
+        }
+
+        console.log(
+            ' Code: ' + (testoRisposta[0].code) + '\n',
+            'Server is up: ' + testoRisposta[0].up + '\n',
+            'Status: ' + testoRisposta[0].status,
+        )
     } catch (error) {
         console.error(error.message)
     }

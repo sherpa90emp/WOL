@@ -1,0 +1,6 @@
+#status {
+    width: 0.99rem;
+    height: 0.99rem;
+    --spinner-animation-speed: 1.1s;
+    animation-duration: var(--spinner-animation-speed);
+}
