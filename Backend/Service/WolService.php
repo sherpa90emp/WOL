@@ -1,8 +1,10 @@
 <?php
 
+require_once __DIR__.'/../Command/WOL.php';
+
 class WolService
 {
-    private function wakeOnLan(): bool
+    public function wakeOnLan(): bool
     {
         $macAddress = getenv("MAC_ADDRESS");
         $port = (int) getenv("PORT");

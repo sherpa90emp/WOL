@@ -1,7 +1,9 @@
 <?php
 
-function wakeOnLan($macAddress, $broadcastAddress, $port): bool
+function wakeOnLan($macAddressRaw, $broadcastAddress, $port): bool
 {
+    $macAddress = trim(str_ireplace(':', '', $macAddressRaw));
+
     if (strlen($macAddress) != 12) {
         echo "Errore: Indirizzo MAC non valido";
         return false;
