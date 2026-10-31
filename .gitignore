@@ -9,5 +9,5 @@
 /dataSources/
 /dataSources.local.xml
 
-/Backend/.env
+/.env
 .idea/
