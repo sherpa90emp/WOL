@@ -46,7 +46,7 @@ class Router
                     {
                         if ($route->method === $requestMethod)
                         {
-                            $controllerInstance = new $className();
+                            $controllerInstance = $this->makeConstructor($className);
                             $methodName = $method->getName();
 
                             $response = $controllerInstance->$methodName();
@@ -90,5 +90,36 @@ class Router
             'uri' => $requestUri,
             ]);
         exit;
+    }
+
+    private function makeConstructor(string $class): object
+    {
+        $constructor = (new ReflectionClass($class))->getConstructor();
+
+        if ($constructor == null)
+        {
+            return new $class();
+        }
+
+        $args = [];
+        foreach ($constructor->getParameters() as $param)
+        {
+            $type = $param->getType();
+
+            if ($type instanceof ReflectionNamedType && !$type->isBuiltin())
+            {
+                $args[] = $this->makeConstructor($type->getName());
+            }
+            elseif ($param->isDefaultValueAvailable())
+            {
+                $args[] = $param->getDefaultValue();
+            }
+            else
+            {
+                throw new Exception("Impossibile risolvere il parametro \${$param->getName()} di $class");
+            }
+        }
+
+        return new $class(...$args);
     }
 }
