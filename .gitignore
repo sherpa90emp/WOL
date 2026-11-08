@@ -8,6 +8,11 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+.gitattributes
+wol-app.tar.gz
+docker-compose.prod.yaml
+deploy.sh
+
 
 /.env
 .idea/

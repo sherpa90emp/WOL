@@ -11,6 +11,10 @@ WORKDIR /var/www/html
 
 COPY . .
 
+RUN if [ -f Backend/composer.json ]; then \
+      composer install --no-dev --optimize-autoloader --working-dir=Backend; \
+    fi
+
 EXPOSE 8085
 
 CMD ["php", "-S", "0.0.0.0:8085", "-t", "Frontend", "router.php"]

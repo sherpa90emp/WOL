@@ -1,5 +1,8 @@
 .env
 .gitignore
+.gitattributes
 .git
 .idea
 Backend/Vendor
+*.tar.gz
+docker-compose*.yml
