@@ -1,6 +1,6 @@
 FROM php:8.3-cli-alpine
 
-RUN apk add --no-cache unzip bzip2 \
+RUN apk add --no-cache unzip bzip2 openssh-client \
     && apk add --no-cache --virtual .build-deps linux-headers \
     && docker-php-ext-install sockets \
     && apk del .build-deps
