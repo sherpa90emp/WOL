@@ -34,7 +34,7 @@ async function wol() {
     setTimeout(function ()
     {
       status();
-    }, 10000)
+    }, 30000)
 }
 
 async function status(){
@@ -58,13 +58,13 @@ async function status(){
 
         if (testoRisposta[0].up) {
             let status = document.querySelector('#status')
-            status.classList.remove('spinner-border', 'fg-primary')
+            status.classList.remove('spinner-border', 'fg-primary', 'text-danger')
             status.classList.add('spinner-grow', 'text-success')
         }
         else
         {
             let status = document.querySelector('#status')
-            status.classList.remove('spinner-border', 'fg-primary')
+            status.classList.remove('spinner-border', 'fg-primary', 'text-succes')
             status.classList.add('spinner-grow', 'text-danger')
         }
 
